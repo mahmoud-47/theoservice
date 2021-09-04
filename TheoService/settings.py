@@ -35,9 +35,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '-oaqd!8ovofn*&hgww-o%43gc_x2)%ot0#%w1!5u6o!n35jj+o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','.theoservice.herokuapp.com']
 
 
 # Application definition
