@@ -7,7 +7,9 @@ cathegories = Cathegorie.objects.all()
 
 def accueil(request):
 	produits=Produit.objects.all().filter(dispo=True).order_by('-date')
-	nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+	nb_panier = 0
+	if request.user.is_authenticated:
+		nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 	search = request.GET.get('search')
 	if request.method=='POST':
 		cath = request.POST.get('cath')
@@ -59,8 +61,9 @@ def compte(request):
 		prod['nb'] = panier.qte
 		prod['date'] = panier.date
 		historiques.append(prod)
-
-	nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+	nb_panier = 0
+	if request.user.is_authenticated:
+		nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 	er=""
 	cathegories = Cathegorie.objects.all()
 	if request.user.is_authenticated:
@@ -167,7 +170,9 @@ def logout_view(request):
 	return redirect('login_view')
 
 def contact(request):
-	nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+	nb_panier = 0
+	if request.user.is_authenticated:
+		nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 	er=''
 	if request.method=='POST':
 		mess=Message()
@@ -193,13 +198,17 @@ def contact(request):
 		return render(request,'contact.html',context)
 
 def detail_produit(request,id):
-	nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+	nb_panier = 0
+	if request.user.is_authenticated:
+		nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 	produit = get_object_or_404(Produit,pk=id)
 	context={'nb_panier':nb_panier,'cathegories':cathegories,'produit':produit}
 	return render(request,'detail_produit.html',context)
 
 def ajout_panier(request,id_produit):
-	nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+	nb_panier = 0
+	if request.user.is_authenticated:
+		nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 	er=''
 	if not request.user.is_authenticated:
 		er="Vous devez d'abord vous connnecter pour réserver"
@@ -223,7 +232,9 @@ def mon_panier(request):
 		pan = Commande.objects.get(produit=prod,user=request.user,commanded=False)
 		pan.qte = request.POST.get('nb')
 		pan.save()
-	nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+	nb_panier = 0
+	if request.user.is_authenticated:
+		nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 	paniers = Commande.objects.all().filter(user=request.user,commanded=False)
 	vide = True
 	if paniers.exists():
@@ -262,7 +273,9 @@ def vider_panier(request):
 	return redirect('mon_panier')
 
 def confirm(request):
-	nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+	nb_panier = 0
+	if request.user.is_authenticated:
+		nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 	er=""
 	cathegories = Cathegorie.objects.all()
 	if request.user.is_authenticated:
@@ -286,11 +299,15 @@ def confirm(request):
 						comm.commanded=True
 						comm.save()
 					msg= f"Salut {user.first_name}, Votre commande a été éffectuée avec succés et sera disponible d'ici 3 jours (Dimanche exclus). Un de nos agents vous contactera lorsque votre produit sera disponible. Assurez vous d'avoir la monnaie. Merci"
-					nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+					nb_panier = 0
+					if request.user.is_authenticated:
+						nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 					return render(request,'prototype.html',{'msg':msg,'user':user,'contact':contact,'cathegories':cathegories,'nb_panier':nb_panier})
 				else:
 					contact = Contact.objects.get(user=request.user)
-					nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+					nb_panier = 0
+					if request.user.is_authenticated:
+						nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 					return render(request,'confirm.html',{'er':'Adresse mail déja pris','user':user,'contact':contact,'cathegories':cathegories,'nb_panier':nb_panier})
 			else:
 				comms = Commande.objects.filter(commanded=False,user=request.user)
@@ -299,7 +316,9 @@ def confirm(request):
 					comm.save()
 				user.save()
 				contact = Contact.objects.get(user=user)
-				nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+				nb_panier = 0
+				if request.user.is_authenticated:
+					nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 				msg= f"Salut {user.first_name}, Votre commande a été éffectuée avec succés et sera disponible d'ici 3 jours (Dimanche exclus). Un de nos agents vous contactera lorsque votre produit sera disponible. Assurez vous d'avoir la monnaie. Merci"
 				return render(request,'prototype.html',{'msg':msg,'user':user,'contact':contact,'cathegories':cathegories,'nb_panier':nb_panier})
 				
@@ -311,7 +330,9 @@ def confirm(request):
 					'adresse':'',
 					'phone':''
 				}
-			nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
+			nb_panier = 0
+			if request.user.is_authenticated:
+				nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 			context={'user':request.user,'contact':contact,'cathegories':cathegories,'nb_panier':nb_panier}
 			return render(request,'confirm.html',context)
 	else:

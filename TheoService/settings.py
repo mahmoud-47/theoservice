@@ -35,9 +35,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '-oaqd!8ovofn*&hgww-o%43gc_x2)%ot0#%w1!5u6o!n35jj+o'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','.theoservice.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
 
 
 # Application definition
@@ -87,23 +87,25 @@ WSGI_APPLICATION = 'TheoService.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+if DEBUG:
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bd_theo',
-        'USER': 'user_db_theo',
-        'PASSWORD': '394500',
-        'HOST': 'localhost',
-        'PORT': '',
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'bd_theo',
+            'USER': 'user_db_theo',
+            'PASSWORD': '394500',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
 
 
 # Password validation
