@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8"> 
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Théo-Services Faites vos achats en ligne avec Sureté">
+    <meta name="author"      content="GySoft">
+    <title>Theo-Services | {% block title %}Home{% endblock %}</title>
+    <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.css' %}" media="screen" >
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+      {% block css %}{% endblock %}
+    </style>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+
+  </head>
+  <body>
+
+    <div class="container-fluid nav-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-10">
+            <ul class="menu">
+              <li><strong><a href="{% url 'home' %}" class="header-link" style="margin-right:10px;">Théo-Services</a></strong></li>
+              <li><a href="{% url 'home' %}#Produits" class="header-link" style="margin-right:10px;">Produits</a></li>
+              <li><a href="{% url 'contact' %}" class="header-link">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-md-2 col-2">
+            {% if user.is_authenticated %}
+              <strong class="rond">{{nb_panier}}</strong>
+              <a href="{% url 'mon_panier' %}">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3 header-link" viewBox="0 0 16 16">
+                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                </svg>
+              </a>
+            {% else %}
+              <strong class="rond">0</strong>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3 header-link" viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+              </svg>
+
+
+            {% endif %}
+            
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+    {% block content %}
+      
+    {% endblock content %}
+  <footer class="footer">
+<div class="container bottom_border">
+<div class="row">
+<div class=" col-sm-4 col-md col-sm-4  col-12 col">
+<h5 class="headin5_amrc col_white_amrc pt2">Théo-Services</h5>
+<!--headin5_amrc-->
+<p class="mb10">Faites votre commande partout où vous soyez et nos agents se chargeront de vous livrer votre produit dans les plus brefs delais.</p>
+<p><i class="fa fa-location-arrow"></i> Saint-Louis </p>
+<p><i class="fa fa-phone"></i>  +221-77 888 88 88  </p>
+<p><i class="fa fa fa-envelope"></i> info@example.com  </p>
+
+
+</div>
+
+
+<div class=" col-sm-4 col-md  col-6 col">
+<h5 class="headin5_amrc col_white_amrc pt2">Liens</h5>
+<!--headin5_amrc-->
+<ul class="footer_ul_amrc">
+<li><a href="{% url 'home' %}">Accueil</a></li>
+<li><a href="{% url 'home' %}#Produits">Produits</a></li>
+<li><a href="{% url 'contact' %}">Contact</a></li>
+{% if user.is_authenticated %}
+  <li><a href="{% url 'compte' %}">Mon Compte</a></li>
+{% else %}
+  <li><a href="{% url 'register_view' %}">Inscription</a></li>
+  <li><a href="{% url 'login_view' %}">Connexion</a></li>
+{% endif %}
+</ul>
+<!--footer_ul_amrc ends here-->
+</div>
+
+
+<div class=" col-sm-4 col-md  col-6 col">
+<h5 class="headin5_amrc col_white_amrc pt2">Cathégories</h5>
+<!--headin5_amrc-->
+<ul class="footer_ul_amrc">
+  {% for cath in cathegories %}
+    <li>{{cath.nom}}</li>
+  {% endfor %}
+</ul>
+<!--footer_ul_amrc ends here-->
+</div>
+
+
+<div class=" col-sm-4 col-md  col-12 col">
+<h5 class="headin5_amrc col_white_amrc pt2">Suivez nous</h5>
+<!--headin5_amrc ends here-->
+<img class="logo" src="{% static "img_sta/logo.jpg" %}"></img>
+<!--footer_ul2_amrc ends here-->
+</div>
+</div>
+</div>
+
+
+<div class="container">
+<ul class="foote_bottom_ul_amrc">
+<li><a href="{% url 'home' %}">Accueil</a></li>
+<li><a href="{% url 'home' %}#Produits">Produits</a></li>
+<li><a href="{% url 'contact' %}">Contact</a></li>
+{% if user.is_authenticated %}
+  <li><a href="{% url 'compte' %}">Mon Compte</a></li>
+{% else %}
+  <li><a href="{% url 'register_view' %}">Inscription</a></li>
+  <li><a href="{% url 'login_view' %}">Connexion</a></li>
+{% endif %}
+
+</ul>
+<!--foote_bottom_ul_amrc ends here-->
+<p class="text-center">Copyright @2021 | Designed With by <a href="#">GySoft</a></p>
+
+<ul class="social_footer_ul">
+<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+<li><a href=""><i class="fab fa-twitter"></i></a></li>
+<li><a href=""><i class="fab fa-linkedin"></i></a></li>
+<li><a href=""><i class="fab fa-instagram"></i></a></li>
+</ul>
+<!--social_footer_ul ends here-->
+</div>
+
+</footer>
+
+<script type="text/javascript">
+  
+  function actu(){
+      var prix = document.querySelectorAll('.prix');
+      var nbs = document.querySelectorAll('.nbs');
+      var somme=0;
+      var tab_prix=[],tab_nbs=[];
+      for(var elem of prix){
+        tab_prix.push(parseInt(elem.innerHTML));
+      }
+      for(var elem of nbs){
+        tab_nbs.push(parseInt(elem.value));
+      }
+      for(let i=0;i<tab_nbs.length;i++){
+        somme+=tab_nbs[i]*tab_prix[i];
+      }
+      document.getElementById('somme').innerHTML=somme;
+    }
+  let deductBtnArr = document.getElementsByClassName('moins');
+  let addButtonArr = document.getElementsByClassName('plus');
+  (function(){
+      var prix = document.querySelectorAll('.prix');
+      var nbs = document.querySelectorAll('.nbs');
+      var somme=0;
+      var tab_prix=[],tab_nbs=[];
+      for(var elem of prix){
+        tab_prix.push(parseInt(elem.innerHTML));
+      }
+      for(var elem of nbs){
+        tab_nbs.push(parseInt(elem.value));
+      }
+      for(let i=0;i<tab_nbs.length;i++){
+        somme+=tab_nbs[i]*tab_prix[i];
+      }
+      document.getElementById('somme').innerHTML=somme;
+    })();
+  for(let deductBtn of deductBtnArr){
+      deductBtn.onclick = function(){
+          let currentInputBox = deductBtn.nextElementSibling;
+          if(currentInputBox.value>1)
+            currentInputBox.value =  currentInputBox.value - 1;
+          var prix = document.querySelectorAll('.prix');
+          var nbs = document.querySelectorAll('.nbs');
+          var somme=0;
+          var tab_prix=[],tab_nbs=[];
+          for(var elem of prix){
+            tab_prix.push(parseInt(elem.innerHTML));
+          }
+          for(var elem of nbs){
+            tab_nbs.push(parseInt(elem.value));
+          }
+          for(let i=0;i<tab_nbs.length;i++){
+            somme+=tab_nbs[i]*tab_prix[i];
+          }
+          document.getElementById('somme').innerHTML=somme;
+      }
+
+
+  }
+
+  for(let addButton of addButtonArr){
+      addButton.onclick = () => {
+          let currentInputBox = addButton.previousElementSibling;
+          if(currentInputBox.value<5)
+            currentInputBox.value =  parseInt(currentInputBox.value) + 1;
+
+          var prix = document.querySelectorAll('.prix');
+          var nbs = document.querySelectorAll('.nbs');
+          var somme=0;
+          var tab_prix=[],tab_nbs=[];
+          for(var elem of prix){
+            tab_prix.push(parseInt(elem.innerHTML));
+          }
+          for(var elem of nbs){
+            tab_nbs.push(parseInt(elem.value));
+          }
+          for(let i=0;i<tab_nbs.length;i++){
+            somme+=tab_nbs[i]*tab_prix[i];
+          }
+          document.getElementById('somme').innerHTML=somme;
+      }
+      
+  }
+
+</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

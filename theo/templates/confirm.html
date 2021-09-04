@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}
+	Finaliser mon achat
+{% endblock title %}
+{% block content %}
+	<div class="container header mb-5">
+		<div class="account-header">
+			<div class="row">
+				{% if user.is_authenticated %}
+					<div class="col-md-8 col-5">
+						<a href="{% url 'mon_panier' %}" class="header-link souligne"><button class="form-btn">Mon panier</button></a>
+					</div>
+				{% else %}
+					<div class="col-md-8 col-5">
+						
+					</div>
+					<div class="col-md-4 col-7">
+						<a href="{% url 'register_view' %}" class="header-link souligne"><b>Inscription</b></a> / <a href="{% url 'login_view' %}" class="header-link souligne"><b>Connexion</b></a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+		<div class="info-compte">
+			<h4>Informations pour la livraison</h4><br>
+			<form method="post">
+				{% csrf_token %}
+				<div class="row mb-2">
+					<div class="col-md-3">
+						<strong >Prenom : </strong>
+					</div>
+					<div class="col-md-9">
+						<input type="text" name="prenom" value="{{user.first_name}}" class="cpc">
+					</div>
+				</div>
+				<div class="row mb-2">
+					<div class="col-md-3">
+						<strong >Nom : </strong>
+					</div>
+					<div class="col-md-9">
+						<input type="text" name="nom" value="{{user.last_name}}" class="cpc">
+					</div>
+				</div>
+				<div class="row mb-2">
+					<div class="col-md-3">
+						<strong >Adresse Mail : </strong>
+					</div>
+					<div class="col-md-9">
+						<input type="text" name="email" value="{{user.email}}" class="cpc">
+					</div>
+				</div>
+				<hr>
+				<div class="row mb-2">
+					<div class="col-md-3">
+						<strong >Adresse : </strong>
+					</div>
+					<div class="col-md-9">
+						<input type="text" name="adresse" value="{{contact.adresse}}" class="cpc">
+					</div>
+				</div>
+				<div class="row mb-2">
+					<div class="col-md-3">
+						<strong >Téléphone : </strong>
+					</div>
+					<div class="col-md-9">
+						<input type="text" name="phone" value="{{contact.phone}}" class="cpc">
+					</div>
+				</div>
+				<hr>
+				<button class="form-btn btn" style="color:rgb(0,255,0);border:1px solid rgb(0,255,0)" type="submit">Mettre à jours mes infos</button>
+				<br>{{er}}
+			</form>
+			
+		</div>
+	</div>	
+
+{% endblock content %}

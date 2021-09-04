@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block title %}
+	Panier
+{% endblock title %}
+{% block content %}
+	<div class="container header mb-5">
+		<div class="account-header">
+			<div class="row">
+				{% if user.is_authenticated %}
+					<div class="col-md-8 col-5">
+						<a href="{% url 'vider_panier' %}" class="header-link souligne" onclick="return confirm('Voulez vous vider votre panier ?')"><button class="form-btn" style="border:1px solid red;color:red">vider le panier</button></a>
+					</div>
+					<div class="col-md-4 col-7">
+						<a href="{% url 'compte' %}" class="header-link souligne"><button class="form-btn"><div class="online-div"></div> Mon Compte</button></a>
+					</div>
+				{% else %}
+					<div class="col-md-8 col-5">
+						
+					</div>
+					<div class="col-md-4 col-7">
+						<a href="{% url 'register_view' %}" class="header-link souligne"><b>Inscription</b></a> / <a href="{% url 'login_view' %}" class="header-link souligne"><b>Connexion</b></a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			{% for prod in produits %}
+				<div class="panier-prod">
+					<div class="row">
+						<div class="col-md-4">
+							<img src="{{prod.image.url}}" class="panier-img">
+						</div>
+						<div class="col-md-4">
+							<h3><strong>{{prod.nom}}</strong></h3><br><br>
+							<strong>Prix : </strong><strong id="prix" class="prix">{{prod.prix}}</strong> Fcfa <br>
+						</div>
+						<div class="col-md-3">
+							<form method="post">
+								{% csrf_token %}
+								<input type="hidden" name="id" value="{{prod.id}}">
+								<p> <strong>Quantité</strong> <button class="form-btn moins">-</button> <input readonly="true" min="1" max="5" id="nb" class="form-btn nbs" type="text" name="nb" value="{{prod.nb}}" style="width:30px">
+								<button class="form-btn plus" onclick="actu()">+</button> </p>
+								<br>
+								
+							</form>
+								<a href="{% url 'supp_panier' id_produit=prod.id %}" onclick="return confirm('Voulez vous supprimer ce produit ?')">
+									<button class="form-btn" style="border:1px solid red;color:red;opacity:.7">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+										  <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+										  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+										</svg> supprimer
+									</button>
+								</a>
+						</div>
+					</div>
+				</div>
+				{% if not forloop.last %}
+					<hr class="mt-2">
+				{% endif %}
+			{% empty %}
+				<div class="row">
+					<h3>Votre Panier est vide Vous pouvez visiter nos produits <a href="{% url 'home' %}#Produits">ici</a></h3>
+				</div>
+			{% endfor %}
+		</div>
+		<br><hr>
+		{% if not vide %}
+			<div>
+			<h3>Terminez votre commande</h3>
+			<div class="montant">
+				<strong>Montant à payer : </strong><strong id="somme"></strong> fcfa
+			</div>
+			<a href="{% url 'confirm' %}">
+				<button>
+					Passer ma commande
+					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3 header-link" viewBox="0 0 16 16">
+		                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+		              </svg>
+				</button>
+			</a>
+		</div>
+		{% endif %}
+		
+	</div>
+
+{% endblock content %}

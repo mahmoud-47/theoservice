@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+	Accueil
+{% endblock title %}
+{% block content %}
+
+	<div class="container header mb-5">
+		<div class="account-header">
+			<div class="row">
+			{% if user.is_authenticated %}
+					<div class="col-md-8 col-5">
+						<a href="{% url 'mon_panier' %}" class="header-link souligne"><button class="form-btn">Mon panier</button></a>
+					</div>
+					<div class="col-md-4 col-7">
+						<a href="{% url 'compte' %}" class="header-link souligne"><button class="form-btn"><div class="online-div"></div> Mon Compte</button></a>
+					</div>
+				{% else %}
+					<div class="col-md-8 col-5">
+						
+					</div>
+					<div class="col-md-4 col-7">
+						<a href="{% url 'register_view' %}" class="header-link souligne"><b>Inscription</b></a> / <a href="{% url 'login_view' %}" class="header-link souligne"><b>Connexion</b></a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+		<div class="row">
+			<div class="col-md-8 header-input">
+				<form method="post">
+					{% csrf_token %}
+					Cathégorie : 
+					<select name="cath">
+						{% for cath in cathegories %}
+							<option value="{{cath}}">{{cath}}</option>
+						{% endfor %}
+					</select>
+					<button class="form-btn" type="submit">Afficher</button>
+				</form>
+			</div>
+			<div class="col-md-4 header-input">
+				<form method="get">
+					{% csrf_token %}
+					<input type="text" name="search" placeholder="Rechercher" class='search-input'>
+					<button class="form-btn" type="submit">Go</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	{% if msg %}
+		<div class="centrer">
+			<strong><h3 style="color:blue">{{msg}}</h3></strong>
+		</div>
+	{% endif %}
+	
+		
+	<div class="container articles" id="Produits">
+		<div class="row">
+			{% for produit in produits %}
+				<div class="col-md-3 produit-mere mb-5">
+					<div class="produit ombre">
+						<a href="{% url 'detail_produit' id=produit.id %}">
+							<img src="{{produit.image.url}}" class="img-produit">
+						</a>
+						<div class="container centrer">
+							<a href="{% url 'detail_produit' id=produit.id %}" style="text-decoration:none;color:black"><h5 style="opacity:.6">{{produit.cath}}</h5></a>
+							<a href="{% url 'detail_produit' id=produit.id %}" style="text-decoration:none;color:black"><h5><strong>{{produit.nom}}</strong></h5></a>
+							<a href="{% url 'detail_produit' id=produit.id %}" style="text-decoration:none;color:rgb(96, 127, 211)"><b><h4>{{produit.prix}} fcfa</h4></b></a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="centrer">
+		{% if produits.has_previous %}
+			<a href="?page={{produits.previous_page_number}}"><< precedent</a>
+		{% endif %}
+		page {{page}}
+		{% if produits.has_next %}
+			<a href="?page={{produits.next_page_number}}">suivant >></a>
+		{% endif %}
+	</div>
+{% endblock content %}

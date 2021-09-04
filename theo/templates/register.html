@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}
+	Inscription
+{% endblock title %}
+{% block content %}
+	<div class="container header mb-5">
+		<div class="account-header">
+			<div class="row">
+				{% if user.is_authenticated %}
+					<div class="col-md-8 col-5">
+				
+					</div>
+					<div class="col-md-4 col-7">
+						<a href="{% url 'compte' %}" class="header-link souligne"><button class="form-btn"><div class="online-div"></div> Mon Compte</button></a>
+					</div>
+				{% else %}
+					<div class="col-md-8 col-5">
+				
+					</div>
+					<div class="col-md-4 col-7">
+						<a href="{% url 'register_view' %}" class="header-link souligne"><b>Inscription</b></a> / <a href="{% url 'login_view' %}" class="header-link souligne"><b>Connexion</b></a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+		<strong><h3>Inscription</h3></strong>
+		<form method="post">
+			{% csrf_token %}
+			<div class="row mb-2">
+				<div class="col-md-3">
+					<strong>Prenom : </strong>
+				</div>
+				<div class="col-md-9">
+					<input required type="text" name="prenom" placeholder="Malick" class="cpc">
+				</div>
+			</div>
+			<div class="row mb-2">
+				<div class="col-md-3">
+					<strong>Nom : </strong>
+				</div>
+				<div class="col-md-9">
+					<input required type="text" name="nom" placeholder="Gaye" class="cpc">
+				</div>
+			</div>
+			<div class="row mb-2">
+				<div class="col-md-3">
+					<strong>Email : </strong>
+				</div>
+				<div class="col-md-9">
+					<input required type="text" name="email" placeholder="exemple@exemple.com" class="cpc">
+				</div>
+			</div>
+			<div class="row mb-2">
+				<div class="col-md-3">
+					<strong>Mot de Passe : </strong>
+				</div>
+				<div class="col-md-9">
+					<input required type="password" name="password" placeholder="Mot de passe" class="cpc">
+				</div>
+			</div>
+			<div class="row mb-2">
+				<div class="col-md-3">
+					<strong>Confirmer le mot de Passe : </strong>
+				</div>
+				<div class="col-md-9">
+					<input required type="password" name="password2" placeholder="Confirmer le mot de passe" class="cpc">
+				</div>
+			</div>
+			<hr>
+			<strong><h3>Informations pour les livraisons</h3></strong>
+			<div class="row mb-2">
+				<div class="col-md-3">
+					<strong>Adresse : </strong>
+				</div>
+				<div class="col-md-9">
+					<input required type="text" name="adresse" placeholder="UGB Village L bloc C chambre 171" class="cpc">
+				</div>
+			</div>
+			<div class="row mb-2">
+				<div class="col-md-3">
+					<strong>Téléphone : </strong>
+				</div>
+				<div class="col-md-9">
+					<input required type="text" name="phone" placeholder="772892696" class="cpc">
+				</div>
+			</div>
+			<button class="form-btn btn" type="submit">S'inscrire</button>
+			{{er}}
+		</form>
+		
+	</div>
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}
+	Connexion
+{% endblock title %}
+{% block content %}
+	<div class="container header mb-5">
+		<div class="account-header">
+			<div class="row">
+				{% if user.is_authenticated %}
+					<div class="col-md-8 col-5">
+						<a href="{% url 'mon_panier' %}" class="header-link souligne"><button class="form-btn">Mon panier</button></a>
+					</div>
+					<div class="col-md-4 col-7">
+						<a href="{% url 'compte' %}" class="header-link souligne"><button class="form-btn"><div class="online-div"></div> Mon Compte</button></a>
+					</div>
+				{% else %}
+					<div class="col-md-8 col-5">
+						
+					</div>
+					<div class="col-md-4 col-7">
+						<a href="{% url 'register_view' %}" class="header-link souligne"><b>Inscription</b></a> / <a href="{% url 'login_view' %}" class="header-link souligne"><b>Connexion</b></a>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		<hr>
+		<strong><h3>Connexion</h3></strong>
+		<form method="post">
+			{% csrf_token %}
+			<div class="row mb-2">
+				<div class="col-md-3">
+					<strong>Email : </strong>
+				</div>
+				<div class="col-md-9">
+					<input required type="text" name="email" placeholder="exemple@exemple.com" class="cpc">
+				</div>
+			</div>
+			<div class="row mb-2">
+				<div class="col-md-3">
+					<strong>Nom : </strong>
+				</div>
+				<div class="col-md-9">
+					<input required type="password" name="password" placeholder="Mot de passe" class="cpc">
+				</div>
+			</div>
+			<button class="form-btn btn" type="submit">Se connecter</button>
+			{{er}}
+		</form>
+		
+	</div>
+{% endblock content %}
