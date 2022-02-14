@@ -10,7 +10,7 @@ class Contact(models.Model):
 	phone = models.CharField(max_length=20)
 	date = models.DateTimeField(auto_now_add=True)
 	def __str__(self):
-		return self.user.first_name+' '+self.user.last_name
+		return self.user.first_name+' '+self.user.last_name 
 
 class Cathegorie(models.Model):
 	nom=models.CharField(max_length=30)
@@ -31,6 +31,9 @@ class Produit(models.Model):
 
 
 class Commande(models.Model):
+	nom = models.CharField(max_length=100,null=True)
+	numero = models.CharField(max_length=20,null=True)
+	adresse = models.CharField(max_length=200,null=True)
 	produit = models.ForeignKey(Produit,on_delete=models.CASCADE)
 	user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 	contacted = models.BooleanField('Contacté',default=False)
@@ -39,9 +42,9 @@ class Commande(models.Model):
 	paied = models.BooleanField("Payé",default=False)
 	commanded = models.BooleanField(default=False)
 	def __str__(self):
-		signe = '-'
+		signe = 'Non Contacté'
 		if self.contacted:
-			signe = '+'
+			signe = 'Contacté'
 		prod = self.produit.nom
 		user = self.user.first_name+' '+self.user.last_name
 		return '({}) {} - {}'.format(signe,prod,user)

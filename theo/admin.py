@@ -1,7 +1,8 @@
 from django.contrib import admin
 from .models import Contact,Cathegorie,Commande,Produit,Message,User
 
-admin.site.register(Cathegorie)
+admin.site.register(Cathegorie) 
+admin.site.register(Contact)
 admin.site.register(Message)
 
 class CommandeInline(admin.TabularInline):

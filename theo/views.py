@@ -13,7 +13,10 @@ def accueil(request):
 	search = request.GET.get('search')
 	if request.method=='POST':
 		cath = request.POST.get('cath')
-		produits=Produit.objects.all().filter(dispo=True,cath__nom=cath).order_by('-date')
+		if cath=="Tout":
+			produits=Produit.objects.all().filter(dispo=True).order_by('-date')
+		else:
+			produits=Produit.objects.all().filter(dispo=True,cath__nom=cath).order_by('-date')
 		msg= f'Produits triés par "{cath}"'
 		context={'cathegories':cathegories,'produits':produits,'nb_panier':nb_panier,"msg":msg}
 	elif search:
@@ -220,7 +223,7 @@ def ajout_panier(request,id_produit):
 	if not my_comms.exists():
 		panier = Commande.objects.create(
 			user = user,
-			produit = prod,
+			produit = prod
 		)
 	return redirect('detail_produit',id = id_produit)
 
@@ -296,6 +299,9 @@ def confirm(request):
 					contact = Contact.objects.get(user=user)
 					comms = Commande.objects.filter(commanded=False,user=request.user)
 					for comm in comms:
+						comm.nom = request.user.first_name+' '+request.user.last_name
+						comm.numero = Contact.objects.get(user=request.user).phone
+						comm.adresse = Contact.objects.get(user=request.user).adresse
 						comm.commanded=True
 						comm.save()
 					msg= f"Salut {user.first_name}, Votre commande a été éffectuée avec succés et sera disponible d'ici 3 jours (Dimanche exclus). Un de nos agents vous contactera lorsque votre produit sera disponible. Assurez vous d'avoir la monnaie. Merci"
@@ -310,8 +316,15 @@ def confirm(request):
 						nb_panier = Commande.objects.all().filter(commanded=False,user=request.user).count()
 					return render(request,'confirm.html',{'er':'Adresse mail déja pris','user':user,'contact':contact,'cathegories':cathegories,'nb_panier':nb_panier})
 			else:
+				contact=Contact.objects.get(user=user)
+				contact.adresse=request.POST.get('adresse').strip()
+				contact.phone=request.POST.get('phone').strip()
+				contact.save()
 				comms = Commande.objects.filter(commanded=False,user=request.user)
 				for comm in comms:
+					comm.nom = request.user.first_name+' '+request.user.last_name
+					comm.numero = Contact.objects.get(user=request.user).phone
+					comm.adresse = Contact.objects.get(user=request.user).adresse
 					comm.commanded=True
 					comm.save()
 				user.save()

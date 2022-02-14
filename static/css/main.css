@@ -5,7 +5,8 @@ footer {
   width:100%; 
   background-color:#263238; 
   min-height:250px; 
-  padding:10px 0px 25px 0px ;
+  padding:10px 0px 25px 0px ;background: red;
+
 }
 .pt2 { 
   padding-top:40px ; 

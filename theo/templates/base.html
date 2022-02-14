@@ -22,121 +22,110 @@
   </head>
   <body>
 
-    <div class="container-fluid nav-bar" style="padding: 10px;">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-10 col-10">
-            <ul class="menu">
-              <li><strong><a href="{% url 'home' %}" class="header-link" style="margin-right:10px;">Théo-Services</a></strong></li>
-              <li><a href="{% url 'home' %}#Produits" class="header-link" style="margin-right:10px;">Produits</a></li>
-              <li><a href="{% url 'contact' %}" class="header-link">Contact</a></li>
-            </ul>
-          </div>
-          <div class="col-md-2 col-2">
-            {% if user.is_authenticated %}
-              <strong class="rond">{{nb_panier}}</strong>
-              <a href="{% url 'mon_panier' %}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3 header-link" viewBox="0 0 16 16">
-                  <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-                </svg>
-              </a>
-            {% else %}
-              <strong class="rond">0</strong>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3 header-link" viewBox="0 0 16 16">
-                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-              </svg>
 
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-            {% endif %}
-            
-            
-          </div>
-        </div>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a href="{% url 'home' %}" class="nav-link">Accueil</a>
+      </li>
+      <li class="nav-item">
+        <a href="{% url 'home' %}#Produits" class="nav-link">Produits</a>
+      </li>
+      <li class="nav-item" style="width:50px">
         
+      </li>
+
+    </ul>
+      <div class="my-2 my-lg-0 ml-2" style="">
+        <center>
+      {% if user.is_authenticated %}
+        <strong class="rond">{{nb_panier}}</strong>
+        <a href="{% url 'mon_panier' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3 header-link" viewBox="0 0 16 16">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+        </a>
+      {% else %}
+        <strong class="rond">0</strong>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart3 header-link" viewBox="0 0 16 16">
+          <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+        </svg>
+
+        </center>
+      {% endif %}
       </div>
-    </div>
+    
+  </div>
+</nav>
+
+
+
     
     {% block content %}
       
     {% endblock content %}
   <footer class="footer">
-<div class="container bottom_border">
-<div class="row">
-<div class=" col-sm-4 col-md col-sm-4  col-12 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Théo-Services</h5>
-<!--headin5_amrc-->
-<p class="mb10">Faites votre commande partout où vous soyez et nos agents se chargeront de vous livrer votre produit dans les plus brefs delais.</p>
-<p><i class="fa fa-location-arrow"></i> Saint-Louis </p>
-<p><i class="fa fa-phone"></i>  +221-77 888 88 88  </p>
-<p><i class="fa fa fa-envelope"></i> info@example.com  </p>
+    <div class="container">
+      <div class="row">
 
+        <div class="col-md-3">
+          <h5 class="headin5_amrc col_white_amrc pt2">Théo-Services</h5>
+          <p class="mb10">Faites votre commande partout où vous soyez et nos agents se chargeront de vous livrer votre produit dans les plus brefs delais.</p>
+          <p><i class="fa fa-location-arrow"></i> Saint-Louis </p>
+          <p><i class="fa fa-phone"></i>  +221-77 888 88 88  </p>
+          <p><i class="fa fa fa-envelope"></i> info@example.com  </p>
+        </div>
+        <div class="col-md-3">
+          <h5 class="headin5_amrc col_white_amrc pt2">Liens</h5>
+          <!--headin5_amrc-->
+          <ul class="footer_ul_amrc">
+              <li><a href="{% url 'home' %}">Accueil</a></li>
+              <li><a href="{% url 'home' %}#Produits">Produits</a></li>
+              <li><a href="{% url 'contact' %}">Contact</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="{% url 'compte' %}">Mon Compte</a></li>
+              {% else %}
+                <li><a href="{% url 'register_view' %}">Inscription</a></li>
+                <li><a href="{% url 'login_view' %}">Connexion</a></li>
+              {% endif %}
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5 class="headin5_amrc col_white_amrc pt2">Cathégories</h5>
+          <!--headin5_amrc-->
+          <ul class="footer_ul_amrc">
+            {% for cath in cathegories %}
+              <li>{{cath.nom}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h5 class="headin5_amrc col_white_amrc pt2">Suivez nous</h5>
+          <!--headin5_amrc ends here-->
+          <img class="logo" src="{% static "img_sta/logo.jpg" %}"></img>
+          <!--footer_ul2_amrc ends here-->
+        </div>
 
-</div>
-
-
-<div class=" col-sm-4 col-md  col-6 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Liens</h5>
-<!--headin5_amrc-->
-<ul class="footer_ul_amrc">
-<li><a href="{% url 'home' %}">Accueil</a></li>
-<li><a href="{% url 'home' %}#Produits">Produits</a></li>
-<li><a href="{% url 'contact' %}">Contact</a></li>
-{% if user.is_authenticated %}
-  <li><a href="{% url 'compte' %}">Mon Compte</a></li>
-{% else %}
-  <li><a href="{% url 'register_view' %}">Inscription</a></li>
-  <li><a href="{% url 'login_view' %}">Connexion</a></li>
-{% endif %}
-</ul>
-<!--footer_ul_amrc ends here-->
-</div>
-
-
-<div class=" col-sm-4 col-md  col-6 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Cathégories</h5>
-<!--headin5_amrc-->
-<ul class="footer_ul_amrc">
-  {% for cath in cathegories %}
-    <li>{{cath.nom}}</li>
-  {% endfor %}
-</ul>
-<!--footer_ul_amrc ends here-->
-</div>
-
-
-<div class=" col-sm-4 col-md  col-12 col">
-<h5 class="headin5_amrc col_white_amrc pt2">Suivez nous</h5>
-<!--headin5_amrc ends here-->
-<img class="logo" src="{% static "img_sta/logo.jpg" %}"></img>
-<!--footer_ul2_amrc ends here-->
-</div>
-</div>
-</div>
-
+      </div>
+    </div>
 
 <div class="container">
-<ul class="foote_bottom_ul_amrc">
-<li><a href="{% url 'home' %}">Accueil</a></li>
-<li><a href="{% url 'home' %}#Produits">Produits</a></li>
-<li><a href="{% url 'contact' %}">Contact</a></li>
-{% if user.is_authenticated %}
-  <li><a href="{% url 'compte' %}">Mon Compte</a></li>
-{% else %}
-  <li><a href="{% url 'register_view' %}">Inscription</a></li>
-  <li><a href="{% url 'login_view' %}">Connexion</a></li>
-{% endif %}
+    <!--foote_bottom_ul_amrc ends here-->
+    <p class="text-center">Copyright @2022 | Designed With by <a href="https://gysoft.herokuapp.com/">GySoft</a></p>
 
-</ul>
-<!--foote_bottom_ul_amrc ends here-->
-<p class="text-center">Copyright @2021 | Designed With by <a href="#">GySoft</a></p>
-
-<ul class="social_footer_ul">
-<li><a href=""><i class="fab fa-facebook-f"></i></a></li>
-<li><a href=""><i class="fab fa-twitter"></i></a></li>
-<li><a href=""><i class="fab fa-linkedin"></i></a></li>
-<li><a href=""><i class="fab fa-instagram"></i></a></li>
-</ul>
-<!--social_footer_ul ends here-->
+    <ul class="social_footer_ul">
+    <li><a href=""><i class="fab fa-facebook-f"></i></a></li>
+    <li><a href=""><i class="fab fa-twitter"></i></a></li>
+    <li><a href=""><i class="fab fa-linkedin"></i></a></li>
+    <li><a href=""><i class="fab fa-instagram"></i></a></li>
+    </ul>
+    <!--social_footer_ul ends here-->
 </div>
 
 </footer>
