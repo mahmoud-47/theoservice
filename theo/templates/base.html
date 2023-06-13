@@ -23,7 +23,7 @@
   <body>
  
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:0px 30px">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="padding:10px 30px">
   <a class="navbar-brand ml" href="{% url 'home' %}" style="opacity:.7">EDF</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -75,43 +75,51 @@
       <div class="row">
 
         <div class="col-md-3">
-          <h5 class="headin5_amrc col_white_amrc pt2">Etablissement Darou Fanay</h5>
-          <p class="mb10">Faites votre commande partout où vous soyez et nos agents se chargeront de vous livrer votre produit dans les plus brefs delais.</p>
-          <p><i class="fa fa-location-arrow"></i> Kaolack </p>
-          <p><i class="fa fa-phone"></i>  +221-77 110 81 86  </p>
-          <p><i class="fa fa-phone"></i>  +221-76 648 94 21  </p>
-          <p><i class="fa fa-phone"></i>  +221-76 750 13 17  </p>
-          <p><i class="fa fa fa-envelope"></i> edfedf499@gmail.com  </p>
+          <center>
+            <h5 class="headin5_amrc col_white_amrc pt2">Etablissement Darou Fanay</h5>
+            <p class="mb10">Faites votre commande partout où vous soyez et nos agents se chargeront de vous livrer votre produit dans les plus brefs delais.</p>
+            <p><i class="fa fa-location-arrow"></i> Kaolack </p>
+            <p><i class="fa fa-phone"></i>  +221-77 110 81 86  </p>
+            <p><i class="fa fa-phone"></i>  +221-76 648 94 21  </p>
+            <p><i class="fa fa-phone"></i>  +221-76 750 13 17  </p>
+            <p><i class="fa fa fa-envelope"></i> edfedf499@gmail.com  </p>
+          </center>
         </div>
         <div class="col-md-3">
-          <h5 class="headin5_amrc col_white_amrc pt2">Liens</h5>
-          <!--headin5_amrc-->
-          <ul class="footer_ul_amrc">
-              <li><a href="{% url 'home' %}">Accueil</a></li>
-              <li><a href="{% url 'home' %}#Produits">Produits</a></li>
-              <li><a href="{% url 'contact' %}">Contact</a></li>
-              {% if user.is_authenticated %}
-                <li><a href="{% url 'compte' %}">Mon Compte</a></li>
-              {% else %}
-                <li><a href="{% url 'register_view' %}">Inscription</a></li>
-                <li><a href="{% url 'login_view' %}">Connexion</a></li>
-              {% endif %}
-          </ul>
+          <center>
+            <h5 class="headin5_amrc col_white_amrc pt2">Liens</h5>
+            <!--headin5_amrc-->
+            <ul class="footer_ul_amrc">
+                <li><a href="{% url 'home' %}">Accueil</a></li>
+                <li><a href="{% url 'home' %}#Produits">Produits</a></li>
+                <li><a href="{% url 'contact' %}">Contact</a></li>
+                {% if user.is_authenticated %}
+                  <li><a href="{% url 'compte' %}">Mon Compte</a></li>
+                {% else %}
+                  <li><a href="{% url 'register_view' %}">Inscription</a></li>
+                  <li><a href="{% url 'login_view' %}">Connexion</a></li>
+                {% endif %}
+            </ul>
+          </center>
         </div>
         <div class="col-md-3">
-          <h5 class="headin5_amrc col_white_amrc pt2">Cathégories</h5>
-          <!--headin5_amrc-->
-          <ul class="footer_ul_amrc">
-            {% for cath in cathegories %}
-              <li>{{cath.nom}}</li>
-            {% endfor %}
-          </ul>
+          <center>
+            <h5 class="headin5_amrc col_white_amrc pt2">Cathégories</h5>
+            <!--headin5_amrc-->
+            <ul class="footer_ul_amrc">
+              {% for cath in cathegories %}
+                <li>{{cath.nom}}</li>
+              {% endfor %}
+            </ul>
+          </center>
         </div>
-        <div class="col-md-3">
-          <h5 class="headin5_amrc col_white_amrc pt2">Suivez nous</h5>
-          <!--headin5_amrc ends here-->
-          <img class="logo" src="{% static "img_sta/logo.jpg" %}"></img>
-          <!--footer_ul2_amrc ends here-->
+        <div class="col-md-3 mb-3">
+          <center>
+            <h5 class="headin5_amrc col_white_amrc pt2">Suivez nous</h5>
+            <!--headin5_amrc ends here-->
+            <img class="logo" src="{% static "img_sta/logo.jpg" %}" style="width: 90%;"></img>
+            <!--footer_ul2_amrc ends here-->
+          </center>
         </div>
 
       </div>
