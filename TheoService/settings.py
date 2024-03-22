@@ -3,9 +3,9 @@ import cloudinary.uploader
 import cloudinary.api
 
 cloudinary.config( 
-  cloud_name = "gysoft", 
-  api_key = "671852242532959", 
-  api_secret = "3sPufNFh2IJnlApb29MacDwB1PQ" 
+  cloud_name = "", 
+  api_key = "", 
+  api_secret = "" 
 )
 from pathlib import Path
 import os
@@ -99,9 +99,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'bd_theo',
-            'USER': 'user_db_theo',
-            'PASSWORD': '394500',
+            'NAME': '',
+            'USER': '',
+            'PASSWORD': '',
             'HOST': 'localhost',
             'PORT': '',
         }
@@ -168,6 +168,3 @@ STATICFILES_DIRS = (
 #STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-import dj_database_url 
-prod_db  =  dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(prod_db)
